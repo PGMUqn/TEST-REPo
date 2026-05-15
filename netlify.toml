@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*.html"
+  to = "/:splat"
+  status = 301
