@@ -1,0 +1,309 @@
+/* ============================================================
+   AGNIRA MUN — Season 3  |  Shared Design System
+   Palette + type derived from the conference branding:
+   deep wine velvet, ivory serif, rose-mauve emblem, gold plate.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+:root{
+  --wine-deep:#1F0A0E;
+  --wine:#3A1219;
+  --wine-2:#48181F;
+  --wine-soft:#5A2530;
+  --rose:#C77E8E;
+  --rose-bright:#E0A0B1;
+  --cream:#F4EBCB;
+  --cream-dim:#C5B795;
+  --gold:#C6A24E;
+  --line:rgba(244,235,203,.16);
+  --line-strong:rgba(244,235,203,.30);
+
+  --display:'Playfair Display',Georgia,serif;
+  --body:'Archivo',system-ui,sans-serif;
+  --impact:'Anton','Archivo Black',sans-serif;
+
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  color:var(--cream);
+  background:var(--wine-deep);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* Ambient page texture + grain */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(90,37,48,.55), transparent 55%),
+    radial-gradient(120% 90% at 90% 20%, rgba(58,18,25,.65), transparent 60%),
+    linear-gradient(180deg, var(--wine) 0%, var(--wine-deep) 70%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+
+/* ---------- Type ---------- */
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:.01em}
+.eyebrow{
+  font-family:var(--body);font-weight:500;font-size:.72rem;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--rose);
+}
+.lead{font-size:1.12rem;color:var(--cream-dim);font-weight:300}
+
+/* Signature sparkle divider (from the brand wordmark) */
+.spark{display:flex;align-items:center;gap:16px;color:var(--gold)}
+.spark::before,.spark::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+.spark i{font-style:normal;font-size:.9rem;line-height:1}
+.spark.center{justify-content:center}
+.spark.center::before,.spark.center::after{flex:0 0 70px}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;cursor:pointer;
+  font-family:var(--body);font-weight:500;font-size:.86rem;letter-spacing:.16em;
+  text-transform:uppercase;padding:15px 30px;border-radius:2px;
+  transition:transform .35s var(--ease),background .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease);
+}
+.btn-primary{background:var(--cream);color:var(--wine-deep);border:1px solid var(--cream)}
+.btn-primary:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line-strong)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+/* ---------- Header ---------- */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 26px;transition:background .4s var(--ease),padding .4s var(--ease),border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.site-head.scrolled{background:rgba(20,8,11,.82);backdrop-filter:blur(12px);border-bottom-color:var(--line);padding:10px 26px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;object-fit:contain}
+.brand b{font-family:var(--display);font-weight:600;font-size:1.18rem;letter-spacing:.16em}
+.brand span{display:block;font-family:var(--body);font-size:.56rem;letter-spacing:.46em;color:var(--rose);text-transform:uppercase;margin-top:2px}
+.nav{display:flex;align-items:center;gap:30px}
+.nav a{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dim);transition:color .3s}
+.nav a:hover,.nav a.active{color:var(--cream)}
+.nav a.active{position:relative}
+.nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--gold)}
+.nav .btn{padding:11px 22px}
+.burger{display:none;background:none;border:0;cursor:pointer;width:30px;height:24px;position:relative}
+.burger span{position:absolute;left:0;right:0;height:2px;background:var(--cream);transition:.3s var(--ease)}
+.burger span:nth-child(1){top:2px}.burger span:nth-child(2){top:11px}.burger span:nth-child(3){top:20px}
+.burger.open span:nth-child(1){top:11px;transform:rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){top:11px;transform:rotate(-45deg)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px 0 80px}
+.hero-emblem{width:128px;margin:0 auto 26px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5));animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-10px)}}
+.hero h1{font-size:clamp(3.4rem,12vw,8rem);letter-spacing:.04em;font-weight:500}
+.hero .season{font-family:var(--display);font-style:italic;font-size:clamp(1.6rem,5vw,2.6rem);color:var(--rose-bright);margin-top:-.2em}
+.hero .tagline{margin:28px auto 0;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-family:var(--display);font-size:clamp(1.05rem,2.6vw,1.5rem);letter-spacing:.18em;text-transform:uppercase;color:var(--cream)}
+.hero .tagline b{font-weight:500}
+.hero .tagline em{color:var(--gold);font-style:normal}
+.hero .dates{margin-top:26px;font-size:.82rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cream-dim)}
+.hero .cta-row{margin-top:38px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cream-dim);opacity:.7}
+.hero .scroll-cue::after{content:"";display:block;width:1px;height:36px;margin:10px auto 0;background:linear-gradient(var(--cream-dim),transparent);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{opacity:.2;transform:scaleY(.4)}50%{opacity:1}100%{opacity:.2;transform:scaleY(.4)}}
+
+/* ---------- Page banner (interior pages) ---------- */
+.page-banner{padding:150px 0 56px;text-align:center}
+.page-banner h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:500}
+.page-banner p{max-width:620px;margin:18px auto 0}
+
+/* ---------- Sections ---------- */
+section{position:relative}
+.band{padding:84px 0}
+.band-tint{background:linear-gradient(180deg,transparent,rgba(31,10,14,.5))}
+.section-head{max-width:680px;margin:0 auto 52px;text-align:center}
+.section-head .eyebrow{margin-bottom:16px;display:inline-block}
+.section-head h2{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:500}
+.section-head p{margin-top:16px}
+
+/* ---------- Narrative strip (spark/flame/fire) ---------- */
+.narrative{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center}
+.narrative .step{padding:34px 22px;border:1px solid var(--line);border-radius:3px;background:rgba(72,24,31,.28);transition:transform .5s var(--ease),border-color .5s}
+.narrative .step:hover{transform:translateY(-6px);border-color:var(--line-strong)}
+.narrative .step h3{font-style:italic;font-size:1.9rem;color:var(--rose-bright);margin-bottom:8px}
+.narrative .step p{color:var(--cream-dim);font-size:.96rem}
+
+/* ---------- Cards grid ---------- */
+.grid{display:grid;gap:24px}
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.grid.cols-4{grid-template-columns:repeat(4,1fr)}
+
+.card{
+  position:relative;border:1px solid var(--line);border-radius:4px;
+  background:linear-gradient(180deg,rgba(90,37,48,.32),rgba(31,10,14,.4));
+  padding:30px 26px;transition:transform .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease);
+  overflow:hidden;
+}
+.card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 22px 50px rgba(0,0,0,.4)}
+.card .idx{font-family:var(--display);font-size:.95rem;letter-spacing:.3em;color:var(--gold)}
+.card h3{font-size:1.55rem;margin:12px 0 6px;font-weight:600}
+.card .abbr{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--rose)}
+.card p{color:var(--cream-dim);font-size:.94rem;margin-top:14px}
+.card .tag{display:inline-block;margin-top:18px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-dim);border:1px solid var(--line);border-radius:40px;padding:5px 14px}
+
+/* ---------- Gallery ---------- */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery figure{position:relative;overflow:hidden;border-radius:5px;border:1px solid var(--line);background:var(--wine);aspect-ratio:3/2}
+.gallery figure img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);filter:saturate(.97)}
+.gallery figure:hover img{transform:scale(1.06)}
+.gallery figure:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+
+/* ---------- Secretariat / profile cards ---------- */
+.profiles{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.profiles .profile{flex:0 1 320px;max-width:340px}
+.profile{border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--wine);transition:transform .5s var(--ease),border-color .5s}
+.profile:hover{transform:translateY(-6px);border-color:var(--gold)}
+.profile img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.profile.poster{background:transparent;border-color:var(--line)}
+.profile.poster img{aspect-ratio:auto;object-fit:contain}
+.profile .meta{padding:18px 20px;text-align:center}
+.profile .role{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--rose)}
+.profile .name{font-family:var(--display);font-size:1.5rem;margin-top:4px}
+
+/* ---------- Info / split blocks ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+.prose p{margin-bottom:16px;color:var(--cream-dim)}
+.prose p.first{font-size:1.18rem;color:var(--cream);font-weight:300}
+.stat-row{display:flex;gap:40px;flex-wrap:wrap;margin-top:30px}
+.stat .n{font-family:var(--impact);font-size:2.8rem;color:var(--rose-bright);line-height:1;letter-spacing:.01em}
+.stat .l{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);margin-top:4px}
+
+/* ---------- Register hub ---------- */
+.reg-card{
+  border:1px solid var(--line);border-radius:5px;padding:38px 34px;
+  background:linear-gradient(180deg,rgba(90,37,48,.34),rgba(31,10,14,.45));
+  display:flex;flex-direction:column;
+}
+.reg-card h3{font-size:1.8rem;margin-bottom:8px}
+.reg-card p{color:var(--cream-dim);flex:1;margin-bottom:24px}
+.reg-card .btn{align-self:flex-start}
+
+.notice{border:1px dashed var(--line-strong);border-radius:4px;padding:18px 22px;color:var(--cream-dim);font-size:.92rem;text-align:center}
+
+/* ---------- CTA strip ---------- */
+.cta-strip{text-align:center;padding:90px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(72,24,31,.3)}
+.cta-strip h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:500}
+.cta-strip p{max-width:540px;margin:14px auto 28px;color:var(--cream-dim)}
+
+/* ---------- Footer ---------- */
+.site-foot{padding:60px 0 34px;border-top:1px solid var(--line);margin-top:10px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot-grid .brand b{font-size:1.3rem}
+.foot-grid p{color:var(--cream-dim);font-size:.92rem;margin-top:14px;max-width:320px}
+.foot-col h4{font-family:var(--body);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--rose);margin-bottom:16px}
+.foot-col a{display:block;color:var(--cream-dim);font-size:.92rem;margin-bottom:10px;transition:color .3s}
+.foot-col a:hover{color:var(--cream)}
+.foot-bottom{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;letter-spacing:.06em;color:var(--cream-dim)}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .split{grid-template-columns:1fr;gap:34px}
+  .grid.cols-4{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav{position:fixed;inset:0 0 0 auto;width:min(80vw,320px);flex-direction:column;justify-content:center;gap:26px;
+       background:rgba(20,8,11,.96);backdrop-filter:blur(14px);transform:translateX(100%);transition:transform .45s var(--ease);
+       border-left:1px solid var(--line)}
+  .nav.open{transform:none}
+  .burger{display:block;z-index:60}
+  .narrative{grid-template-columns:1fr}
+  .grid.cols-3,.grid.cols-2,.grid.cols-4{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery figure:first-child{grid-column:span 2;grid-row:auto}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-bottom{justify-content:flex-start}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---------- Committee logo cards ---------- */
+.committee-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.committee-card{display:block;border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  background:var(--wine-deep);transition:transform .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease)}
+.committee-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.committee-card .poster{position:relative;aspect-ratio:3/4;overflow:hidden}
+.committee-card .poster img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.committee-card:hover .poster img{transform:scale(1.05)}
+.committee-card .cap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-top:1px solid var(--line)}
+.committee-card .cap b{font-family:var(--display);font-size:1.18rem;font-weight:600;letter-spacing:.02em}
+.committee-card .cap small{display:block;font-family:var(--body);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim);margin-top:2px}
+.committee-card .cap .go{color:var(--gold);font-size:1.1rem;transition:transform .4s var(--ease)}
+.committee-card:hover .cap .go{transform:translateX(4px)}
+.committee-card .eb-flag{position:absolute;top:12px;left:12px;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  background:rgba(20,8,11,.7);backdrop-filter:blur(4px);border:1px solid var(--line);color:var(--cream);padding:5px 11px;border-radius:40px}
+
+/* ---------- Committee detail ---------- */
+.committee-detail{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
+.committee-detail .poster-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:420px}
+.committee-detail .poster-wrap img{width:100%;display:block}
+.committee-detail h1{font-size:clamp(2.6rem,6vw,4rem);font-weight:500;line-height:1}
+.committee-detail .full{font-family:var(--display);font-style:italic;font-size:1.4rem;color:var(--rose-bright);margin:6px 0 18px}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:26px;transition:color .3s}
+.back-link:hover{color:var(--gold)}
+@media (max-width:860px){
+  .committee-grid{grid-template-columns:repeat(2,1fr)}
+  .committee-detail{grid-template-columns:1fr;gap:30px}
+  .committee-detail .poster-wrap{max-width:340px;margin:0 auto}
+}
+@media (max-width:480px){ .committee-grid{grid-template-columns:1fr} }
+
+/* ---------- Countdown ---------- */
+.countdown-band{padding:64px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(72,24,31,.4),rgba(31,10,14,.55));text-align:center}
+.countdown-band .eyebrow{display:inline-block;margin-bottom:8px}
+.countdown-band h2{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2.2rem);margin-bottom:30px}
+.countdown{display:flex;justify-content:center;align-items:flex-start;gap:clamp(10px,3vw,34px);flex-wrap:nowrap}
+.countdown .unit{display:flex;flex-direction:column;align-items:center;min-width:clamp(58px,15vw,120px)}
+.countdown .num{font-family:var(--impact);font-size:clamp(2.6rem,9vw,5.4rem);line-height:1;color:var(--cream);
+  font-variant-numeric:tabular-nums;letter-spacing:.01em;text-shadow:0 6px 26px rgba(0,0,0,.45)}
+.countdown .lbl{margin-top:10px;font-size:clamp(.56rem,1.5vw,.74rem);letter-spacing:.28em;text-transform:uppercase;color:var(--rose)}
+.countdown .sep{font-family:var(--impact);font-size:clamp(2rem,7vw,4rem);line-height:1.1;color:var(--gold);opacity:.5}
+.countdown-band.is-live h2{color:var(--gold)}
+.countdown-live{font-family:var(--display);font-style:italic;font-size:clamp(1.6rem,5vw,2.6rem);color:var(--rose-bright)}
+@media (max-width:420px){
+  .countdown .sep{display:none}
+  .countdown{gap:8px}
+}
+
+/* ---------- Agenda box (committee detail) ---------- */
+.agenda-box{margin:18px 0 4px;padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:4px;background:linear-gradient(180deg,rgba(90,37,48,.3),rgba(31,10,14,.4))}
+.agenda-box .agenda-label{font-family:var(--body);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.agenda-box .agenda-text{font-family:var(--display);font-size:1.22rem;line-height:1.35;color:var(--cream);margin-top:8px;font-weight:500}
+.agenda-box.pending .agenda-text{font-style:italic;color:var(--cream-dim)}
+
+/* ---------- Agenda list (multiple agendas) ---------- */
+.agenda-list{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:14px}
+.agenda-list li{display:flex;gap:14px;align-items:flex-start}
+.agenda-list .ag-num{flex:0 0 auto;font-family:var(--impact);font-size:1.15rem;line-height:1.2;color:var(--gold)}
+.agenda-list li span:last-child{font-family:var(--display);font-size:1.12rem;line-height:1.4;color:var(--cream);font-weight:500}
